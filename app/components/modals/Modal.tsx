@@ -90,7 +90,7 @@ return (
                 lg:h-auto
                 md:h-auto">
                 
-        {/* CONTENT */}
+       
         <div 
            className={`
            translate

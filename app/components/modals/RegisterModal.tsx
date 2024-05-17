@@ -130,7 +130,7 @@ const RegisterModal = () => {
         body={bodyContent}
         footer={footerContent}
         />
-    ); {/*1:11:40 / 8:40:33*/}
+    ); 
 
 }
 
