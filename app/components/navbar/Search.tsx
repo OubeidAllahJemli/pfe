@@ -19,7 +19,7 @@ const Search = () => {
         if(locationValue){
             return getByValue(locationValue as string)?.label;
         }
-        return 'Anywhere';
+        return 'Location';
     }, [getByValue, locationValue]);
 
     const durationLabel = useMemo(() => {
@@ -33,7 +33,7 @@ const Search = () => {
             }
             return `${diff} Days`;
         }
-        return 'Any Week'
+        return 'Date'
     }, [startDate, endDate]);
 
     const guestLabel = useMemo(() => {

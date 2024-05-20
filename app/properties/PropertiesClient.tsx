@@ -1,62 +1,99 @@
 'use client';
+
 import { useCallback, useState } from "react";
-import { SafeListing,  SafeUser } from "../types";
+import { SafeListing, SafeUser } from "../types";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 import Container from "../components/Container";
 import axios from "axios";
 import Heading from "../components/Heading";
-import ListingCard from "../components/listings/ListingCard";
+import PropertyCard from "../components/listings/PropertyCard";
+import UpdateModal from "../components/modals/UpdateModal";
 
-interface PropertiesClientProps{
+interface PropertiesClientProps {
     listings: SafeListing[];
-    currentUser?: SafeUser | null
+    currentUser?: SafeUser | null;
 }
 
 const PropertiesClient: React.FC<PropertiesClientProps> = ({
     listings,
     currentUser
 }) => {
-    const router= useRouter();
+    const router = useRouter();
     const [deletingId, setDeletingId] = useState('');
+    const [editingListing, setEditingListing] = useState<SafeListing | null>(null);
 
     const onCancel = useCallback((id: string) => {
         setDeletingId(id);
 
         axios.delete(`/api/listings/${id}`)
-        .then(() => {
-            toast.success('listing deleted');
-            router.refresh();
-        })
-        .catch((error) => {
-        toast.error(error?.response?.data?.error);
-        })
-        .finally(() => {
-            setDeletingId('');
-        })
+            .then(() => {
+                toast.success('Listing deleted');
+                router.refresh();
+            })
+            .catch((error) => {
+                toast.error(error?.response?.data?.error);
+            })
+            .finally(() => {
+                setDeletingId('');
+            });
     }, [router]);
-    return(
+
+    const handleEditListing = useCallback((listing: SafeListing) => {
+        setEditingListing(listing);
+    }, []);
+
+    const handleSubmitListing = useCallback(async (id: string, updatedListing: Partial<SafeListing>) => {
+        try {
+            const requestData = {
+                title: updatedListing.title,
+                description: updatedListing.description,
+                price: parseFloat(String(updatedListing.price || "0")), 
+            };
+            console.log('requestData:', requestData);
+    
+            await axios.patch(`/api/listings/${id}`, requestData);
+    
+     
+            toast.success('Listing updated');
+            setEditingListing(null);
+            router.refresh();
+        } catch (error: any) {
+            toast.error(error?.response?.data?.error || 'Failed to update listing');
+        }
+    }, [router, setEditingListing]);
+
+    return (
         <Container>
             <Heading 
-            title="Properties"
-            subtitle="List of your properties"
+                title="Properties"
+                subtitle="List of your properties"
             />
-                <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
-                    {listings.map((listing) => (
-                        <ListingCard 
-                            key={listing.id}
-                            data={listing}
-                            actionId={listing.id}
-                            onAction={onCancel}
-                            disabled={deletingId === listing.id}
-                            actionLabel="Delete listing"
-                            currentUser={currentUser}
-                        />
-                    ))}
+            {editingListing && (
+                <UpdateModal 
+                    isOpen={!!editingListing} 
+                    onClose={() => setEditingListing(null)} 
+                    onSubmit={(id, updatedListing) => handleSubmitListing(id, updatedListing)} 
+                    listing={editingListing} 
+                />
+            )}
+            <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
+                {listings.map((listing) => (
+                    <PropertyCard 
+                        key={listing.id}
+                        data={listing}
+                        actionId={listing.id}
+                        onAction={onCancel}
+                        onEdit={handleEditListing}
+                        disabled={deletingId === listing.id}
+                        actionLabel="Delete listing"
+                        editLabel="Edit listing"
+                        currentUser={currentUser}
+                    />
+                ))}
             </div>
-
-        </Container> 
-    )
+        </Container>
+    );
 };
 
 export default PropertiesClient;
