@@ -71,7 +71,7 @@ const LoginModal = () => {
     const bodyContent = (
         <div className="flex flex-col gap-4">
          
-            <Heading title="Welcomeback to KinkoBooking"
+            <Heading title="Welcome back to KinkoBooking"
                      subtitle ="Login to your account !" />
             <Input 
             id="email"

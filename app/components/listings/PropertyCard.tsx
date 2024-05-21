@@ -14,8 +14,8 @@ interface PropertyCardProps {
     onAction?: (id: string) => void;
     onEdit?: (listing: SafeListing) => void;
     disabled?: boolean;
-    actionLabel?: string;
-    editLabel?: string;
+    actionLabel?: any;
+    editLabel?: any;
     actionId?: string;
     currentUser?: SafeUser | null;
 }
@@ -70,20 +70,20 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
     }, [reservation]);
 
     return (
-        <div 
+        <div
             onClick={() => router.push(`/listings/${data.id}`)}
             className="col-span-1 cursor-pointer group"
         >
             <div className="flex flex-col gap-2 w-full">
                 <div className="aspect-square w-full relative overflow-hidden rounded-xl">
-                    <Image 
+                    <Image
                         fill
                         alt="Listing"
                         src={data.imageSrc}
                         className="object-cover h-full w-full group-hover:scale-110 transition"
                     />
                     <div className="absolute top-3 right-3">
-                        <HeartButton 
+                        <HeartButton
                             listingId={data.id}
                             currentUser={currentUser}
                         />
@@ -106,22 +106,30 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
                         <div className="font-light">/night</div>
                     )}
                 </div>
-                <div className="flex flex-row gap-2">
-                    {onAction && actionLabel && (
-                        <Button 
-                            disabled={disabled}
-                            small
-                            label={actionLabel}
-                            onClick={handleCancel}
-                        />
-                    )}
+                {currentUser?.id===data.userId&&<div>Published: <span className="font-bold">{data?.published?"Yes":"Waiting for approval"}</span></div>}
+                <div className="grid grid-cols-2 gap-2">
+
                     {onEdit && editLabel && (
-                        <Button 
-                            small
-                            label={editLabel}
+                        <button
+                        disabled={disabled}
+
                             onClick={handleEdit}
-                        />
+                            type="button"
+                            className=" hover:bg-black hover:text-white focus:ring-4 focus:outline-none focus:ring-black font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2">
+                            {editLabel}
+                        </button>
+
                     )}
+                                        {onAction && actionLabel && (
+                
+                <button
+                disabled={disabled}
+                onClick={handleCancel}
+                type="button"
+                className="text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2">
+                {actionLabel}
+            </button>
+            )}
                 </div>
             </div>
         </div>

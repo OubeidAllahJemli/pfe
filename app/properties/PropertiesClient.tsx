@@ -9,6 +9,8 @@ import axios from "axios";
 import Heading from "../components/Heading";
 import PropertyCard from "../components/listings/PropertyCard";
 import UpdateModal from "../components/modals/UpdateModal";
+import { CiEdit } from "react-icons/ci";
+import { FaRegTrashAlt } from "react-icons/fa";
 
 interface PropertiesClientProps {
     listings: SafeListing[];
@@ -86,8 +88,9 @@ const PropertiesClient: React.FC<PropertiesClientProps> = ({
                         onAction={onCancel}
                         onEdit={handleEditListing}
                         disabled={deletingId === listing.id}
-                        actionLabel="Delete listing"
-                        editLabel="Edit listing"
+                        actionLabel={<span className="flex gap-2 text-lg items-center"><FaRegTrashAlt className="text-xl" /> Delete</span>
+                    }
+                        editLabel={<span className="flex gap-2 text-lg items-center"><CiEdit className="text-2xl" /> Edit</span> }
                         currentUser={currentUser}
                     />
                 ))}

@@ -7,6 +7,7 @@ import Container from "../components/Container";
 import axios from "axios";
 import Heading from "../components/Heading";
 import ListingCard from "../components/listings/ListingCard";
+import { IoBagRemove } from "react-icons/io5";
 
 interface TripsClientProps{
     reservations: SafeReservation[];
@@ -50,7 +51,7 @@ const TripsClient: React.FC<TripsClientProps> = ({
                             actionId={reservation.id}
                             onAction={onCancel}
                             disabled={deletingId === reservation.id}
-                            actionLabel="Cancel reservation"
+                            actionLabel={<span className="flex gap-2 justify-center text-lg items-center"><IoBagRemove className="text-xl" /> Cancel</span>}
                             currentUser={currentUser}
                         />
                     ))}

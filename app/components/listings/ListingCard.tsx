@@ -13,7 +13,7 @@ interface ListingCardProps{
     reservation?: SafeReservation;
     onAction?: (id: string) => void;
     disabled?: boolean;
-    actionLabel?: string;
+    actionLabel?: any;
     actionId?: string;
     currentUser?: SafeUser | null;
 }
@@ -103,12 +103,14 @@ const ListingCard: React.FC<ListingCardProps> = ({
                     )}
                 </div>
                 {onAction && actionLabel && (
-                    <Button 
+          
+                    <button
                     disabled={disabled}
-                    small
-                    label={actionLabel}
                     onClick={handleCancel}
-                    />
+                    type="button"
+                    className="text-white justify-center bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2">
+                    {actionLabel}
+                </button>
                 )}
 
             </div>

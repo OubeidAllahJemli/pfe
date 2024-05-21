@@ -14,6 +14,7 @@ import ListingInfo from "@/app/components/listings/ListingInfo";
 import useLoginModal from "@/app/hooks/useLoginModal";
 import ListingReservation from "@/app/components/listings/ListingReservation";
 import ListingReview from "@/app/components/listings/ListingReview";
+import EmptyState from "@/app/components/EmptyState";
 
 const initialDateRange = {
     startDate: new Date(),
@@ -153,7 +154,12 @@ const ListingClient: React.FC<ListingClientProps> = ({
     const category = useMemo(() => {
         return categories.find((item) => item.label === listing.category);
     }, [listing.category]);
-
+    if(!listing?.published && currentUser?.id!==listing?.userId ){
+        return <EmptyState 
+        title="This listing is not published yet"
+        subtitle="Wait for admin confirmation !"
+        />
+    }
     return (
         <Container>
             <div className="max-w-screen-lg mx-auto">

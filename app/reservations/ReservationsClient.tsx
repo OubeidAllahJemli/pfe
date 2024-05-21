@@ -8,6 +8,7 @@ import { SafeReservation, SafeUser } from "../types";
 import Container from "../components/Container";
 import ListingCard from "../components/listings/ListingCard";
 import Heading from "../components/Heading";
+import { IoBagRemove } from "react-icons/io5";
 
 interface ReservationsClientProps {
     reservations: SafeReservation[];
@@ -54,7 +55,7 @@ const ReservationsClient: React.FC<ReservationsClientProps> = ({
                         actionId={reservation.id}
                         onAction={onCancel}
                         disabled={deletingId === reservation.id}
-                        actionLabel="Cancel guest reservation"
+                        actionLabel={<span className="flex gap-2 justify-center text-lg items-center"><IoBagRemove className="text-xl" /> Cancel</span>}
                         currentUser={currentUser}
                     />
                 ))}
