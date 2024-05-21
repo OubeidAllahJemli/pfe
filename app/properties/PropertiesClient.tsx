@@ -51,6 +51,7 @@ const PropertiesClient: React.FC<PropertiesClientProps> = ({
                 title: updatedListing.title,
                 description: updatedListing.description,
                 price: parseFloat(String(updatedListing.price || "0")), 
+                imageSrc: updatedListing.imageSrc,
             };
             console.log('requestData:', requestData);
     

@@ -43,7 +43,7 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
             toast.error('Failed to update profile');
         }
     };
-
+ 
     const bodyContent = (
         <div className="flex flex-col gap-4">
             <ImageUpload value={image} onChange={handleUpload} />

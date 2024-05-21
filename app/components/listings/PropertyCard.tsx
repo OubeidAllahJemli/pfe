@@ -106,13 +106,12 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
                         <div className="font-light">/night</div>
                     )}
                 </div>
-                {currentUser?.id===data.userId&&<div>Published: <span className="font-bold">{data?.published?"Yes":"Waiting for approval"}</span></div>}
+                {currentUser?.id === data.userId && <div>Published: <span className="font-bold">{data?.published ? "Yes" : "Waiting for approval"}</span></div>}
                 <div className="grid grid-cols-2 gap-2">
 
                     {onEdit && editLabel && (
                         <button
-                        disabled={disabled}
-
+                            disabled={disabled}
                             onClick={handleEdit}
                             type="button"
                             className=" hover:bg-black hover:text-white focus:ring-4 focus:outline-none focus:ring-black font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2">
@@ -120,16 +119,16 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
                         </button>
 
                     )}
-                                        {onAction && actionLabel && (
-                
-                <button
-                disabled={disabled}
-                onClick={handleCancel}
-                type="button"
-                className="text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2">
-                {actionLabel}
-            </button>
-            )}
+                    {onAction && actionLabel && (
+
+                        <button
+                            disabled={disabled}
+                            onClick={handleCancel}
+                            type="button"
+                            className="text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2">
+                            {actionLabel}
+                        </button>
+                    )}
                 </div>
             </div>
         </div>

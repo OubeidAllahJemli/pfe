@@ -10,6 +10,7 @@ interface IUpdateListingData {
     title?: string;
     description?: string;
     price?: number;
+    imageSrc?: string;
 }
 
 export async function DELETE(
@@ -50,7 +51,7 @@ export async function PATCH(
     }
 
     const body = await request.json();
-    const { title, description, price }: IUpdateListingData = body;
+    const { title, description, price, imageSrc }: IUpdateListingData = body;
 
     
     try {
@@ -63,6 +64,7 @@ export async function PATCH(
                 title,
                 description,
                 price,
+                imageSrc,
             }
         });
 
