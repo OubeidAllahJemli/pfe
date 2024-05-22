@@ -83,7 +83,7 @@ const ProfileClient: React.FC<ProfileClientProps> = ({
                         onClick={handleChangePassword}
                         className="bg-blue-500 text-white px-4 py-2 rounded"
                     >
-                        {<span className="flex gap-2 text-lg items-center"><CiLock className="text-2xl" /> Change password</span> }
+                        {<span className="flex gap-2 text-lg items-center"><CiLock className="text-2xl" /> Change Password</span> }
                     </button>
                 </div>
             </div>
