@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 import prisma from "@/app/libs/prismadb";
 import { NextResponse } from "next/server";
 
-{/*2:08:01 / 8:40:33*/}
+
 
 export async function POST(
     request: Request

@@ -34,7 +34,6 @@ const ListingReview: React.FC<ListingReviewProps> = ({
 
     return (
         <div>
-            {/* Reviews Section */}
             <div className="mt-6">
                 <h2 className="text-2xl font-semibold">Reviews</h2>
                 {reviews.length > 0 ? (
@@ -43,13 +42,13 @@ const ListingReview: React.FC<ListingReviewProps> = ({
                             <div key={review.id} className="border p-4 rounded-lg shadow-sm bg-white">
                                 <div className="flex items-center justify-between">
                                     <div className="flex items-center">
-                                        <Avatar src={review.user.image} height={40} width={40} /> {/* Show avatar */}
+                                        <Avatar src={review.user.image} height={40} width={40} /> 
                                         <div className="ml-3">
                                             <span className="font-semibold">{review.user.name}</span>
                                             <div className="flex items-center ml-2 text-gray-600">
                                                 
                                                 <span>{review.rating}/5</span>
-                                                <FaStar className="mb-1.5 ml-1 text-yellow-500 " /> {/* Star icon */}
+                                                <FaStar className="mb-1.5 ml-1 text-yellow-500 " /> 
                                             </div>
                                         </div>
                                     </div>
@@ -63,13 +62,13 @@ const ListingReview: React.FC<ListingReviewProps> = ({
                     <p className="mt-4 text-gray-500">No reviews yet.</p>
                 )}
             </div>
-            {/* End of Reviews Section */}
+          
 
-            {/* Review Form */}
+            
             <div className="mt-6">
                 <h2 className="text-2xl font-semibold">Leave a Review</h2>
                 <form onSubmit={handleSubmit(onSubmitReview)} className="mt-4 space-y-4">
-                    {/* Rating Select */}
+                
                     <div className="border p-4 rounded-lg shadow-sm bg-white">
                         <label htmlFor="rating" className="block text-md font-medium text-gray-700">Rating</label>
                         <div className="border p-1 rounded-lg  bg-white">
@@ -103,9 +102,9 @@ const ListingReview: React.FC<ListingReviewProps> = ({
                   
 
                  
-                    {/* End of Comment Input */}
+                    
 
-                    {/* Submit Button */}
+              
                     <button
                         type="submit"
                             className="
@@ -130,10 +129,10 @@ const ListingReview: React.FC<ListingReviewProps> = ({
                     >
                         {isLoading ? 'Submitting...' : 'Submit Review'}
                     </button>
-                    {/* End of Submit Button */}
+                  
                 </form>
             </div>
-            {/* End of Review Form */}
+            
         </div>
     );
 };
